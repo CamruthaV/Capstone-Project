@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
+require("dotenv").config();
 
-const FACULTY_KEY = process.env.FACULTY_KEY;
-const ADMIN_KEY = process.env.ADMIN_KEY;
+const FACULTY_KEY = process.env.FACULTY_KEY || "facultyKey";
+const ADMIN_KEY = process.env.ADMIN_KEY || "adminKey";
 
 router.post("/validate-key", (req, res) => {
   const { key } = req.body;

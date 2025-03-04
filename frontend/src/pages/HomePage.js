@@ -11,10 +11,14 @@ function HomePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/auth/login', { key });
+      const response = await axios.post('/auth/validate-key', { key });
       if (response.data.role) {
         localStorage.setItem("apiKey", key);
-        navigate('/questions');
+        if (response.data.role === 'faculty') {
+          navigate('/faculty');
+        } else if (response.data.role === 'admin') {
+          navigate('/admin');
+        }
       } else {
         alert('Invalid key! Please try again.');
       }
