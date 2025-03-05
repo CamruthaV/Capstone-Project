@@ -5,6 +5,7 @@ import AdminPage from "./pages/AdminPage";
 import FacultyPage from "./pages/FacultyPage";
 import QuestionForm from "./components/QuestionForm";
 import QuestionList from "./components/QuestionList";
+import GeneratedQuestionsPage from "./pages/GeneratedQuestionsPage";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/faculty" element={<FacultyPage />} />
         <Route path="/add-questions" element={<QuestionForm />} />
         <Route path="/view-questions" element={<QuestionList />} />
+        <Route path="/generated-questions" element={<GeneratedQuestionsPage />} />
       </Routes>
     </Router>
   );

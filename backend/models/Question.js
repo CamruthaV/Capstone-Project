@@ -16,7 +16,7 @@ const questionSchema = new mongoose.Schema(
 
     difficultyLevel: {
       type: String,
-      enum: ["easy", "medium", "hard"],
+      enum: ["1", "2", "3"],
       required: true,
     },
     marks: {

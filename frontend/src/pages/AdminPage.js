@@ -1,20 +1,23 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import axios from "../api/axios";
 
 const AdminPage = () => {
   const [subjectCode, setSubjectCode] = useState("");
   const [coLevel, setCoLevel] = useState(1);
   const [difficultyLevel, setDifficultyLevel] = useState(1);
+  const navigate = useNavigate();
 
   const handleGenerate = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/questions/generate", {
+      const response = await axios.post("/api/questions/generate", {
         subjectCode,
         coLevel,
         difficultyLevel,
       });
-      alert("Question Paper Generated Successfully!");
+      const questions = response.data;
+      navigate("/generated-questions", { state: { questions } });
     } catch (error) {
       console.error("Error generating question paper:", error);
     }
