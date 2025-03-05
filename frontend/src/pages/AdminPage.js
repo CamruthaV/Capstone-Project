@@ -6,17 +6,19 @@ const AdminPage = () => {
   const [subjectCode, setSubjectCode] = useState("");
   const [coLevel, setCoLevel] = useState(1);
   const [difficultyLevel, setDifficultyLevel] = useState(1);
+  const [numberOfQuestions, setNumberOfQuestions] = useState("");
   const navigate = useNavigate();
 
   const handleGenerate = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/questions/generate", {
+      const response = await axios.post("/questions/generate", {
         subjectCode,
         coLevel,
         difficultyLevel,
       });
-      const questions = response.data;
+      const questions = response.data.questions;
+      console.log(response);
       navigate("/generated-questions", { state: { questions } });
     } catch (error) {
       console.error("Error generating question paper:", error);
@@ -69,6 +71,13 @@ const AdminPage = () => {
             <option value={2}>2</option>
             <option value={3}>3</option>
           </select>
+        </div>
+
+        <div>
+        <label className="block text-xl font-semibold mb-2">
+            Number of Questions
+          </label>
+        <input type="number" value={numberOfQuestions} onChange={(e) => setNumberOfQuestions(e.target.value)} required className="w-80 p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg" />
         </div>
 
         {/* Submit Button */}

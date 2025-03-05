@@ -88,12 +88,17 @@ exports.deleteQuestion = async (req, res) => {
 // Generate a question paper (admin)
 exports.generateQuestionPaper = async (req, res) => {
   try {
-    const { subject, numberOfQuestions, difficultyLevel } = req.body;
+    const { subjectCode, numberOfQuestions, difficultyLevel } = req.body;
 
-    const questions = await Question.aggregate([
-      { $match: { subject, difficultyLevel } }, // Filter by subject and difficulty
-      { $sample: { size: numberOfQuestions } }, // Random selection
-    ]);
+    // const questions = await Question.aggregate([
+    //   { $match: { subjectCode:123, difficultyLevel:1  } }, // Filter by subject and difficulty
+    //   { $sample: { size: 2 } }, // Random selection
+    // ]);
+
+    const questions = await Question.find({
+      subjectCode : subjectCode,
+      difficultyLevel: difficultyLevel, // Now using "1" instead of "easy"
+    }).limit(numberOfQuestions);
 
     res.status(200).json({ message: "Question paper generated", questions });
   } catch (err) {
