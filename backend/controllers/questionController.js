@@ -1,15 +1,16 @@
-// filepath: backend/controllers/questionController.js
 const Question = require("../models/Question");
 
 // Add new questions
 exports.addQuestion = async (req, res) => {
-  const { subjectCode, coLevel, difficultyLevel, marks, questionText } = req.body;
+  const { subjectCode, subjectName, coLevel, difficultyLevel, questionType, marks, questionText } = req.body;
 
   try {
     const newQuestion = new Question({
       subjectCode,
+      subjectName,
       coLevel,
       difficultyLevel,
+      questionType,
       marks,
       questionText,
       addedBy: req.user.role, // Use user role instead of user id
@@ -88,17 +89,16 @@ exports.deleteQuestion = async (req, res) => {
 // Generate a question paper (admin)
 exports.generateQuestionPaper = async (req, res) => {
   try {
-    const { subjectCode, numberOfQuestions, difficultyLevel } = req.body;
-
-    // const questions = await Question.aggregate([
-    //   { $match: { subjectCode:123, difficultyLevel:1  } }, // Filter by subject and difficulty
-    //   { $sample: { size: 2 } }, // Random selection
-    // ]);
+    const { subjectCode, subjectName, shortQuestions, longQuestions, coLevel, difficultyLevel } = req.body;
 
     const questions = await Question.find({
       subjectCode : subjectCode,
-      difficultyLevel: difficultyLevel, // Now using "1" instead of "easy"
-    }).limit(numberOfQuestions);
+      subjectName: subjectName,
+      coLevel: coLevel,
+      difficultyLevel: difficultyLevel, 
+      shortQuestions: shortQuestions,
+      longQuestions: longQuestions,
+    }).limit(shortQuestions + longQuestions);
 
     res.status(200).json({ message: "Question paper generated", questions });
   } catch (err) {

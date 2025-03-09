@@ -11,9 +11,9 @@ const FacultyPage = () => {
   };
 
   // Route to view the question list
-  const handleViewQuestions = () => {
-    navigate("/view-questions"); 
-  };
+  // const handleViewQuestions = () => {
+  //   navigate("/view-questions"); 
+  // };
 
   return (
     <div className="text-center mt-7">
@@ -35,12 +35,12 @@ const FacultyPage = () => {
           Start Adding Questions
         </button>
         <br />
-        <button
+        {/* <button
           onClick={handleViewQuestions}
           className="w-80 px-5 py-3 bg-green-500 text-white text-lg font-semibold rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
         >
           View Current Questions
-        </button>
+        </button> */}
       </div>
     </div>
   );

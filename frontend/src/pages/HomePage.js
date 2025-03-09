@@ -1,4 +1,3 @@
-// filepath: frontend/src/pages/HomePage.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
@@ -29,8 +28,17 @@ function HomePage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold text-black-500 mb-8">Welcome to the Test Paper Generator</h1>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100 relative">
+      {/* Logo Section */}
+      <div className="absolute top-0 left-0 m-4">
+        <img src="/GITAM-logo.png" alt="Logo" className="h-20" />
+      </div>
+      
+      <div className="absolute top-5 center-0 m-4 text-4xl font-bold">
+        <h1>Welcome to GITAM Examination Cell</h1>
+      </div>
+
+      <h1 className="text-3xl font-regular text-black-500 mb-8">Automated Test Paper Generator</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input 
           type="text" 
